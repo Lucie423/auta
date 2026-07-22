@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Moderní responzivní webová stránka pro prezentaci služeb."
+  >
+
+  <title>Moderní web | Vaše značka</title>
+
+  <style>
+    :root {
+      --primary: #6d5dfc;
+      --primary-dark: #5546e8;
+      --secondary: #13c4a3;
+      --background: #f7f8fc;
+      --surface: #ffffff;
+      --text: #1c2333;
+      --muted: #697386;
+      --border: #e5e8f0;
+      --shadow: 0 18px 45px rgba(28, 35, 51, 0.1);
+      --radius: 20px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(100% - 40px, var(--max-width));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-heading {
+      max-width: 680px;
+      margin: 0 auto 50px;
+      text-align: center;
+    }
+
+    .section-heading span {
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+    }
+
+    .section-heading h2 {
+      margin: 10px 0 15px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .button-secondary:hover {
+      color: var(--primary);
+      background: white;
+    }
+
+    /* Navigace */
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .navbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--background);
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Úvod */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 110px 0 90px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(19, 196, 163, 0.16), transparent 28%),
+        radial-gradient(circle at 15% 10%, rgba(109, 93, 252, 0.18), transparent 30%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 8px 14px;
+      border: 1px solid rgba(109, 93, 252, 0.2);
+      border-radius: 999px;
+      color: var(--primary);
+      background: rgba(109, 93, 252, 0.08);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      font-size: clamp(2.7rem, 6vw, 5.2rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero-text {
+      max-width: 620px;
+      margin: 24px 0 32px;
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 440px;
+      padding: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 32px;
+      background: linear-gradient(145deg, #786bff, #5142d8);
+      color: white;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-card::before {
+      width: 240px;
+      height: 240px;
+      top: -80px;
+      right: -70px;
+    }
+
+    .hero-card::after {
+      width: 160px;
+      height: 160px;
+      bottom: -60px;
+      left: -40px;
+    }
+
+    .dashboard {
+      position: relative;
+      z-index: 1;
+      margin-top: 70px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    .dashboard-line {
+      height: 12px;
+      margin-bottom: 15px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .dashboard-line:nth-child(1) {
+      width: 45%;
+    }
+
+    .dashboard-line:nth-child(2) {
+      width: 85%;
+    }
+
+    .dashboard-line:nth-child(3) {
+      width: 65%;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      padding: 20px 10px;
+      border-radius: 16px;
+      background: white;
+      color: var(--text);
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+
+    .stat small {
+      color: var(--muted);
+    }
+
+    /* Služby */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(109, 93, 252, 0.3);
+      box-shadow: var(--shadow);
+    }
+
+    .service-icon {
+      display: grid;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 22px;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(109, 93, 252, 0.1);
+      font-size: 1.6rem;
+    }
+
+    .service-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .service-card p {
+      color: var(--muted);
+    }
+
+    /* O nás */
+
+    .about {
+      background: var(--surface);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .about-visual {
+      min-height: 420px;
+      display: grid;
+      place-items: center;
+      border-radius: 32px;
+      background:
+        linear-gradient(145deg, rgba(109, 93, 252, 0.92), rgba(19, 196, 163, 0.8));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .about-visual strong {
+      font-size: clamp(3rem, 8vw, 6rem);
+    }
+
+    .about-content h2 {
+      margin-bottom: 20px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+    }
+
+    .about-content > p {
+      margin-bottom: 24px;
+      color: var(--muted);
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 30px;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .check {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--secondary);
+    }
+
+    /* Kontakt */
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 50px;
+      padding: 50px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-info h2 {
+      margin-bottom: 15px;
+      font-size: 2.3rem;
+      line-height: 1.15;
+    }
+
+    .contact-info p {
+      margin-bottom: 28px;
+      color: var(--muted);
+    }
+
+    .contact-details {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field label {
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      outline: none;
+      padding: 14px 16px;
+      color: var(--text);
+      background: var(--background);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-field textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(109, 93, 252, 0.1);
+    }
+
+    .form-message {
+      min-height: 24px;
+      color: #07806a;
+      font-weight: 700;
+    }
+
+    /* Patička */
+
+    .footer {
+      padding: 35px 0;
+      color: var(--muted);
+      background: #151927;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer a {
+      color: white;
+    }
+
+    /* Responzivní zobrazení */
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .about-grid,
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        padding-top: 80px;
+      }
+
+      .hero-card {
+        min-height: 380px;
+      }
+
+      .contact-wrapper {
+        padding: 35px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .menu-button {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 74px;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 15px 20px 25px;
+        border-bottom: 1px solid var(--border);
+        background: white;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 14px;
+      }
+
+      .services-grid,
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: auto;
+      }
+
+      .dashboard {
+        margin-top: 35px;
+      }
+
+      .contact-wrapper {
+        padding: 25px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <nav class="navbar container" aria-label="Hlavní navigace">
+      <a href="#uvod" class="logo">Moje<span>Značka</span></a>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Otevřít navigaci"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#uvod">Úvod</a></li>
+        <li><a href="#sluzby">Služby</a></li>
+        <li><a href="#o-nas">O nás</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="uvod">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">Moderní digitální řešení</span>
+
+          <h1>
+            Vytváříme weby, které vám pomohou <span>růst</span>.
+          </h1>
+
+          <p class="hero-text">
+            Navrhujeme rychlé, moderní a responzivní webové stránky,
+            které dobře vypadají na počítači, tabletu i telefonu.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#kontakt" class="button">Nezávazná poptávka</a>
+            <a href="#sluzby" class="button button-secondary">Naše služby</a>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Ukázka výsledků">
+          <h2>Váš digitální úspěch</h2>
+          <p>Design, vývoj a optimalizace na jednom místě.</p>
+
+          <div class="dashboard">
+            <div class="dashboard-line"></div>
+            <div class="dashboard-line"></div>
+            <div class="dashboard-line"></div>
+
+            <div class="stats">
+              <div class="stat">
+                <strong>99 %</strong>
+                <small>spokojenost</small>
+              </div>
+
+              <div class="stat">
+                <strong>2×</strong>
+                <small>vyšší výkon</small>
+              </div>
+
+              <div class="stat">
+                <strong>24/7</strong>
+                <small>dostupnost</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sluzby">
+      <div class="container">
+        <div class="section-heading">
+          <span>Naše služby</span>
+          <h2>Vše, co potřebujete pro úspěšný web</h2>
+          <p>
+            Od prvního návrhu až po spuštění a následnou správu.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">🎨</div>
+            <h3>Webdesign</h3>
+            <p>
+              Originální a přehledný design odpovídající vaší značce
+              a potřebám zákazníků.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">💻</div>
+            <h3>Vývoj webu</h3>
+            <p>
+              Rychlé a responzivní stránky postavené pomocí moderních
+              webových technologií.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">🚀</div>
+            <h3>SEO optimalizace</h3>
+            <p>
+              Technická optimalizace, díky které mohou zákazníci váš
+              web snáze najít ve vyhledávačích.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="o-nas">
+      <div class="container about-grid">
+        <div class="about-visual" aria-hidden="true">
+          <strong>10+</strong>
+        </div>
+
+        <div class="about-content">
+          <h2>Proměníme váš nápad v profesionální web</h2>
+
+          <p>
+            Zaměřujeme se na jednoduchost, rychlost a měřitelné výsledky.
+            Každý projekt přizpůsobujeme konkrétním cílům klienta.
+          </p>
+
+          <ul class="check-list">
+            <li>
+              <span class="check">✓</span>
+              Responzivní zobrazení na všech zařízeních
+            </li>
+            <li>
+              <span class="check">✓</span>
+              Rychlé načítání a kvalitní technické zpracování
+            </li>
+            <li>
+              <span class="check">✓</span>
+              Individuální přístup a srozumitelná komunikace
+            </li>
+          </ul>
+
+          <a href="#kontakt" class="button">Začít nový projekt</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="container">
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <h2>Pojďme vytvořit něco skvělého</h2>
+
+            <p>
+              Napište nám stručně o svém projektu. Ozveme se vám co nejdříve.
+            </p>
+
+            <div class="contact-details">
+              <div>📧 info@mojeznacka.cz</div>
+              <div>📞 +420 123 456 789</div>
+              <div>📍 Praha, Česká republika</div>
+            </div>
+          </div>
+
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="name">Jméno</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Jan Novák"
+                  required
+                >
+              </div>
+
+              <div class="form-field">
+                <label for="email">E-mail</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="jan@email.cz"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="subject">Předmět</label>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                placeholder="Tvorba nového webu"
+                required
+              >
+            </div>
+
+            <div class="form-field">
+              <label for="message">Zpráva</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Popište nám svůj projekt..."
+                required
+              ></textarea>
+            </div>
+
+            <button class="button" type="submit">Odeslat zprávu</button>
+            <p class="form-message" id="formMessage" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>
+        © <span id="currentYear"></span> MojeZnačka. Všechna práva vyhrazena.
+      </p>
+
+      <p>
+        Vytvořeno s <span aria-label="láskou">♥</span> v České republice
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+    const contactForm = document.getElementById("contactForm");
+    const formMessage = document.getElementById("formMessage");
+
+    // Mobilní navigace
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.textContent = isOpen ? "✕" : "☰";
+    });
+
+    // Zavření navigace po kliknutí na odkaz
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰";
+      });
+    });
+
+    // Ukázkové odeslání formuláře
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      formMessage.textContent =
+        "Děkujeme! Vaše zpráva byla připravena k odeslání.";
+
+      contactForm.reset();
+    });
+
+    // Aktuální rok v patičce
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
