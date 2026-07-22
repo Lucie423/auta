@@ -31,7 +31,7 @@ a {
 
   background:
     linear-gradient(rgba(3, 7, 18, 0.45), rgba(3, 7, 18, 0.92)),
-    url("./obrázky/auto_budoucnosti.jpg") center / cover;
+    url("./obrazky/auto_budoucnosti.jpg") center / cover;
 }
 .uvodni-obsah h1 {
   margin: 0;
