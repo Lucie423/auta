@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -30,9 +31,8 @@ a {
 
   background:
     linear-gradient(rgba(3, 7, 18, 0.45), rgba(3, 7, 18, 0.92)),
-    url("obrazky/hlavni-auto.jpg") center / cover;
+    url("./obrázky/auto_budoucnosti.jpg") center / cover;
 }
-
 .uvodni-obsah h1 {
   margin: 0;
   color: #00e5ff;
@@ -57,16 +57,16 @@ a {
   display: inline-block;
   min-width: 190px;
   padding: 16px 25px;
-  border: 2px solid #00e5ff;
+  border: 2px solid #00eaff;
   border-radius: 30px;
-  color: #071018;
-  background-color: #00e5ff;
+  color: #00b7ff;
+  background-color: #000000;
   font-weight: bold;
   transition: 0.3s;
 }
 
 .tlacitko:hover {
-  color: #00e5ff;
+  color: #00d9ff;
   background-color: transparent;
   transform: translateY(-4px);
 }
