@@ -31,9 +31,8 @@ a {
 
   background:
     linear-gradient(rgba(3, 7, 18, 0.45), rgba(3, 7, 18, 0.92)),
-    url("obrazky/hlavni-auto.jpg") center / cover;
+    url("./obrázky/auto_budoucnosti.jpg") center / cover;
 }
-
 .uvodni-obsah h1 {
   margin: 0;
   color: #00e5ff;
