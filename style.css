@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 * {
   box-sizing: border-box;
@@ -213,15 +213,19 @@ a {
     gap: 15px;
   }
 }
+
+.mainInfo {
+  font-family: "Orbitron", sans-serif;
+}
 /* O nás */
 #onas {
     padding: 30px 30px;
-    color: #f5f5f5;
+    color: #c1c3c4;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif;
-     font-size: 24px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 24px;
 }
 
 .onas-obsah {
